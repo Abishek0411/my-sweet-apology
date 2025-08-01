@@ -5,6 +5,7 @@ import JealousySection from '@/components/JealousySection';
 import GameSection from '@/components/GameSection';
 import SurpriseSection from '@/components/SurpriseSection';
 import FinalSection from '@/components/FinalSection';
+import MessageScroll from '@/components/MessageScroll';
 
 const Index = () => {
   const [isSurpriseUnveiled, setIsSurpriseUnveiled] = useState(false);
@@ -20,6 +21,7 @@ const Index = () => {
       <JealousySection />
       <GameSection onSurpriseUnveiled={unveilSurprise} />
       {isSurpriseUnveiled && <SurpriseSection />}
+      {isSurpriseUnveiled && <MessageScroll />}
       {isSurpriseUnveiled && <FinalSection />}
     </div>
   );
