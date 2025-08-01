@@ -14,7 +14,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/my-sweet-apology">
+      <BrowserRouter>
         <LoveMusicPlayer /> {/* 🎵 MAGIC GOES HERE */}
         <Routes>
           <Route path="/" element={<Index />} />
