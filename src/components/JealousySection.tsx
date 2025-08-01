@@ -50,7 +50,7 @@ const JealousySection: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % messages.length);
-    }, 2500);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [canStartSlide]);
