@@ -5,7 +5,11 @@ import { Label } from '@/components/ui/label';
 import FloatingHeart from './FloatingHeart';
 import Sparkle from './Sparkle';
 
-const GameSection: React.FC = () => {
+interface GameSectionProps {
+  onSurpriseUnveiled: () => void;
+}
+
+const GameSection: React.FC<GameSectionProps> = ({ onSurpriseUnveiled }) => {
   const [buttonPosition, setButtonPosition] = useState({ x: 50, y: 50 });
   const [input, setInput] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -31,9 +35,14 @@ const GameSection: React.FC = () => {
 
   const handleSurpriseClick = () => {
     if (isUnlocked) {
-      // Navigate to surprise section
-      const surpriseSection = document.getElementById('surprise-section');
-      surpriseSection?.scrollIntoView({ behavior: 'smooth' });
+      // Unveil the surprise sections
+      onSurpriseUnveiled();
+      
+      // Scroll to surprise section after a brief delay to allow rendering
+      setTimeout(() => {
+        const surpriseSection = document.getElementById('surprise-section');
+        surpriseSection?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
   };
 
