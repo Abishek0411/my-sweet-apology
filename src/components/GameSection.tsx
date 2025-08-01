@@ -21,18 +21,6 @@ const GameSection: React.FC<GameSectionProps> = ({ onSurpriseUnveiled }) => {
       const newX = Math.random() * 60 + 10;
       const newY = Math.random() * 60 + 10;
       setButtonPosition({ x: newX, y: newY });
-
-      // Screen shake
-      document.body.classList.add("shake");
-      setTimeout(() => {
-        requestAnimationFrame(() => document.body.classList.remove("shake"));
-      }, 200);
-
-      // Haptic feedback for mobile
-      if (window.navigator.vibrate) {
-        window.navigator.vibrate(100);
-      }
-    }
   }, [isUnlocked]);
   
   const handleMouseMove = useCallback(
@@ -106,7 +94,6 @@ const GameSection: React.FC<GameSectionProps> = ({ onSurpriseUnveiled }) => {
         {/* Dodging Button Container */}
         <div className="relative h-64 mb-8 bg-white/10 backdrop-blur-sm rounded-3xl border-2 border-white/30 overflow-hidden">
           <Button
-            id="surprise-button"
             className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 font-bubbly text-lg px-6 py-3 ${
               isUnlocked 
                 ? 'bg-primary hover:bg-primary/90 cursor-pointer' 
