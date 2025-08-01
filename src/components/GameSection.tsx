@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,11 +18,48 @@ const GameSection: React.FC<GameSectionProps> = ({ onSurpriseUnveiled }) => {
   const dodgeButton = useCallback(() => {
     if (!isUnlocked) {
       setAttempts(prev => prev + 1);
-      const newX = Math.random() * 60 + 10; // 10-70% to keep it in viewport
-      const newY = Math.random() * 60 + 10; // 10-70% to keep it in viewport
+      const newX = Math.random() * 60 + 10;
+      const newY = Math.random() * 60 + 10;
       setButtonPosition({ x: newX, y: newY });
+
+      // Screen shake
+      document.body.classList.add("shake");
+      setTimeout(() => {
+        requestAnimationFrame(() => document.body.classList.remove("shake"));
+      }, 200);
+
+      // Haptic feedback for mobile
+      if (window.navigator.vibrate) {
+        window.navigator.vibrate(100);
+      }
     }
   }, [isUnlocked]);
+  
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (isUnlocked) return;
+
+      const button = document.getElementById("surprise-button");
+      if (!button) return;
+
+      const rect = button.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 100) {
+        // If cursor is within 100px, dodge!
+        dodgeButton();
+      }
+    },
+    [isUnlocked, dodgeButton]
+  );
+
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => document.removeEventListener("mousemove", handleMouseMove);
+  }, [handleMouseMove]);
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -69,6 +106,7 @@ const GameSection: React.FC<GameSectionProps> = ({ onSurpriseUnveiled }) => {
         {/* Dodging Button Container */}
         <div className="relative h-64 mb-8 bg-white/10 backdrop-blur-sm rounded-3xl border-2 border-white/30 overflow-hidden">
           <Button
+            id="surprise-button"
             className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 font-bubbly text-lg px-6 py-3 ${
               isUnlocked 
                 ? 'bg-primary hover:bg-primary/90 cursor-pointer' 

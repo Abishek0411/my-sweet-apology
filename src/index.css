@@ -183,4 +183,9 @@
     scroll-snap-align: start;
     min-height: 100vh;
   }
+
+  .shake {
+    animation: shake 0.3s ease-in-out;
+  }
+
 }

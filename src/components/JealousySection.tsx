@@ -31,7 +31,7 @@ const JealousySection: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setCurrentMessage(0); // show first message
-          setTimeout(() => setCanStartSlide(true), 2000); // then start slideshow after 3s
+          setTimeout(() => setCanStartSlide(true), 1000); // then start slideshow after 3s
         }
       },
       { threshold: 0.6 }
@@ -50,7 +50,7 @@ const JealousySection: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % messages.length);
-    }, 3000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, [canStartSlide]);
