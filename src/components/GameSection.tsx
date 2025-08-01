@@ -18,9 +18,10 @@ const GameSection: React.FC<GameSectionProps> = ({ onSurpriseUnveiled }) => {
   const dodgeButton = useCallback(() => {
     if (!isUnlocked) {
       setAttempts(prev => prev + 1);
-      const newX = Math.random() * 60 + 10;
-      const newY = Math.random() * 60 + 10;
+      const newX = Math.random() * 60 + 10; // 10-70% to keep it in viewport
+      const newY = Math.random() * 60 + 10; // 10-70% to keep it in viewport
       setButtonPosition({ x: newX, y: newY });
+    }
   }, [isUnlocked]);
   
   const handleMouseMove = useCallback(
