@@ -71,7 +71,6 @@ const GameSection: React.FC = () => {
             }}
             onMouseEnter={dodgeButton}
             onClick={handleSurpriseClick}
-            disabled={!isUnlocked}
           >
             🎁 SURPRISE 🎁
           </Button>
