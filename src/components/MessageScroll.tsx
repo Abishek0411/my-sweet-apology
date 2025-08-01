@@ -38,13 +38,13 @@ const MessageScroll: React.FC = () => {
     },
     {
       sender: "You",
-      text: "OMG you're crazy! I love it 🥰",
+      text: "OMG! let me take a look🥰",
       time: "2:40 PM",
       type: "received"
     },
     {
       sender: "Me",
-      text: "Anything for my love 💖✨",
+      text: "This is the least I could do for my gundu boi 💖✨",
       time: "2:41 PM",
       type: "sent"
     },

@@ -2,8 +2,13 @@ import React from 'react';
 import FloatingHeart from './FloatingHeart';
 import Sparkle from './Sparkle';
 import apologyPhoto from '@/assets/apology-photo.jpg';
+import { playLoveMusic } from './LoveMusicPlayer'; // 👈 import this
 
 const ApologySection: React.FC = () => {
+  const handlePlayMusic = () => {
+    playLoveMusic();
+  };
+
   return (
     <section className="scroll-snap-section bg-gradient-romantic min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Floating decorations */}
@@ -39,6 +44,14 @@ const ApologySection: React.FC = () => {
             <span className="animate-bounce-love" style={{ animationDelay: '0.1s' }}>🥺</span>
             <span className="animate-bounce-love" style={{ animationDelay: '0.2s' }}>💔</span>
           </div>
+
+          {/* 🎵 Music Trigger Button */}
+          <button
+            onClick={handlePlayMusic}
+            className="mt-8 px-6 py-3 rounded-full bg-pink-500 hover:bg-pink-600 text-white font-bubbly text-lg shadow-love transition-all duration-300"
+          >
+            💖 Click for music
+          </button>
         </div>
       </div>
     </section>

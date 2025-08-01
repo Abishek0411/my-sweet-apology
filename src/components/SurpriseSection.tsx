@@ -8,9 +8,9 @@ import Sparkle from './Sparkle';
 import firstRide from '@/assets/first-ride.jpg';
 import bowlingCouple from '@/assets/bowling-couple.jpg';
 import dancingCouple from '@/assets/dancing-couple.jpg';
-import privateMoments from '@/assets/private-moments.jpg';
-import weddingFuture from '@/assets/wedding-future.jpg';
-import futureFamily from '@/assets/future-family.jpg';
+import privateMoments from '@/assets/private-moments.png';
+import weddingFuture from '@/assets/wedding-future.png';
+import futureFamily from '@/assets/future-family.png';
 
 const SurpriseSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -33,7 +33,7 @@ const SurpriseSection: React.FC = () => {
     },
     {
       image: privateMoments,
-      caption: "Private moments hehe 👀",
+      caption: "Aerohub 👀",
       emoji: "😘"
     },
     {

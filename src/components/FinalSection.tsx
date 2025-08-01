@@ -31,7 +31,7 @@ const FinalSection: React.FC = () => {
           <div className="text-6xl mb-8 animate-bounce-love">❤️</div>
           
           <h1 className="text-3xl md:text-5xl font-bubbly font-bold text-foreground mb-8 leading-relaxed">
-            I love you so much, more than anything.
+            I love you so much, more than anything soni kutta.
           </h1>
           
           <div className="flex justify-center gap-4 text-4xl mb-8">

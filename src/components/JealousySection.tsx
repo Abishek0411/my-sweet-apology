@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import FloatingHeart from './FloatingHeart';
 import Sparkle from './Sparkle';
 
 const JealousySection: React.FC = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
-  
+  const [canStartSlide, setCanStartSlide] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
   const messages = [
     {
       text: "Who are the other three who wished you? 👀",
@@ -23,16 +25,41 @@ const JealousySection: React.FC = () => {
     }
   ];
 
+  // Detect when section comes into view
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCurrentMessage(0); // show first message
+          setTimeout(() => setCanStartSlide(true), 2000); // then start slideshow after 3s
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
+  // Slideshow logic (starts after first message)
+  useEffect(() => {
+    if (!canStartSlide) return;
+
     const interval = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % messages.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [canStartSlide]);
 
   return (
-    <section className="scroll-snap-section bg-gradient-soft min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="scroll-snap-section bg-gradient-soft min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
       {/* Floating decorations */}
       <FloatingHeart delay={0} className="top-20 left-12" size="sm" />
       <FloatingHeart delay={1} className="top-40 right-16" size="md" color="red" />
